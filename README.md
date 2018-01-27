@@ -52,9 +52,8 @@ targeted at it.
       responses from the API include CORS headers that allow all origins, so the Same-Origin Policy need not be worked 
       around.
 - CSS
-    - The CSS Flexible Box Layout Module ("Flexbox") will be utilized for layout as it's supported by all current 
-      browsers, and it is unknown whether the target browsers for this project are expected to include Internet Explorer 
-      9 or earlier, though I assume they aren't.
+    - A mobile-first approach is used, so media queries are utilized only when styles for larger screens differ from
+      mobile screens using typical break points.
 - HTML 5.1
     - Where applicable I will use the latest HTML semantic elements. However, no shim to enable the styling of these 
       elements in old versions of Internet Explorer will be included.
@@ -69,8 +68,8 @@ targeted at it.
       files in the **public** directory so that they may be accessed using the HTTP URI scheme.
 
 With respect to [Consideration 5](http://resttest.bench.co/front-end#additional), the complexity of the solution making 
-sense for the problems I'm solving, there seems to be no need for a framework or module bundler in this project. With 
-more information about the scope of the project, the backlog of other features that have been planned, and the intent of
-the company to maintain this project, additional dependencies may be considered. But, on its own, plain old JavaScript, 
-CSS, and HTML are more than sufficient for this tiny job, with the exception of date formatting (Moment.js) because that
-is error prone code to maintain for any project.
+sense for the problems I'm solving, there seems to be no need for a framework, module bundler, or CSS preprocessor in 
+this project. With more information about the scope of the project, the backlog of other features that have been 
+planned, and the intent of the company to maintain this project, additional dependencies may be considered. But, on its 
+own, plain old JavaScript, CSS, and HTML are more than sufficient for this tiny job, with the exception of date 
+formatting (Moment.js) because that is error prone code to maintain for any project.
