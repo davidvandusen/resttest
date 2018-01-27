@@ -1,0 +1,19 @@
+{
+  "name": "resttest",
+  "version": "1.0.0",
+  "description": "An implementation of the Bench front-end restTest.",
+  "scripts": {
+    "start": "./node_modules/.bin/http-server",
+    "postinstall": "cp -r ./node_modules/moment ./public/vendor/moment"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/davidvandusen/resttest.git"
+  },
+  "author": "David VanDusen <github@davidvandusen.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "moment": "^2.20.1",
+    "http-server": "^0.11.1"
+  }
+}
