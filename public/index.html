@@ -36,16 +36,16 @@
           <th>Date</th>
           <th>Company</th>
           <th>Account</th>
-          <th class="numeric">{{total}}</th>
+          <th class="numeric">{{formatAccountingInverted total}}</th>
         </tr>
         </thead>
         <tbody>
           {{#each transactions}}
             <tr>
-              <td class="date compact">{{date}}</td>
-              <td class="key-data">{{company}}</td>
-              <td class="comment">{{account}}</td>
-              <td class="numeric key-data">{{amount}}</td>
+              <td class="date compact">{{formatDateShort Date}}</td>
+              <td class="key-data">{{Company}}</td>
+              <td class="comment">{{Ledger}}</td>
+              <td class="numeric key-data">{{formatAccountingInverted Amount}}</td>
             </tr>
           {{/each}}
         </tbody>

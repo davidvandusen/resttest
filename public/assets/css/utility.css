@@ -1,3 +1,7 @@
+.error-message {
+  text-align: center;
+}
+
 .loading-indicator {
   animation: 1s throb infinite;
   padding: 40px;
@@ -19,8 +23,15 @@
 .module {
   background-color: #ffffff;
   box-shadow: 0 2px 3px rgba(0,0,0,0.15);
-  border-radius: 3px;
   overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+
+  .module {
+    border-radius: 3px;
+  }
+
 }
 
 .responsive-table {

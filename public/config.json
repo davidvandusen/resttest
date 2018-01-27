@@ -1,0 +1,4 @@
+{
+  "API_TRANSACTIONS_URL": "http://resttest.bench.co/transactions/",
+  "API_TRANSACTIONS_EXT": ".json"
+}
