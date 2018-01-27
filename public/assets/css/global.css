@@ -4,3 +4,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
 }
+
+noscript {
+  text-align: center;
+}

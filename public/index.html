@@ -10,7 +10,24 @@
 <header class="site-header">
   <h1 class="site-header-title">Bench Test</h1>
 </header>
-<main class="site-main">
+<main class="site-main" id="root">
+  <noscript>
+    <p>
+      This website uses JavaScript to dynamically load your data. To use it you must enable JavaScript in your browser.
+    </p>
+  </noscript>
+</main>
+<script id="loading-template" type="text/x-handlebars-template">
+  <div class="loading-indicator">Loading...</div>
+</script>
+<script id="error-template" type="text/x-handlebars-template">
+  <div class="error-message">
+    <p>
+      {{message}}
+    </p>
+  </div>
+</script>
+<script id="transactions-table-template" type="text/x-handlebars-template">
   <div class="module">
     <div class="responsive-table">
       <table class="data-table">
@@ -19,33 +36,24 @@
           <th>Date</th>
           <th>Company</th>
           <th>Account</th>
-          <th class="numeric">$12,345.67</th>
+          <th class="numeric">{{total}}</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="date compact">Jan 3rd, 2018</td>
-          <td class="key-data">TEST COMPANY</td>
-          <td class="comment">Example Account</td>
-          <td class="numeric key-data">$1,234.56</td>
-        </tr>
-        <tr>
-          <td class="date compact">Jan 2nd, 2018</td>
-          <td class="key-data">TEST COMPANY</td>
-          <td class="comment">Example Account</td>
-          <td class="numeric key-data">$1,234.56</td>
-        </tr>
-        <tr>
-          <td class="date compact">Jan 1st, 2018</td>
-          <td class="key-data">TEST COMPANY</td>
-          <td class="comment">Example Account</td>
-          <td class="numeric key-data">$1,234.56</td>
-        </tr>
+          {{#each transactions}}
+            <tr>
+              <td class="date compact">{{date}}</td>
+              <td class="key-data">{{company}}</td>
+              <td class="comment">{{account}}</td>
+              <td class="numeric key-data">{{amount}}</td>
+            </tr>
+          {{/each}}
         </tbody>
       </table>
     </div>
   </div>
-</main>
+</script>
+<script src="vendor/handlebars/dist/handlebars.min.js"></script>
 <script src="vendor/moment/min/moment.min.js"></script>
 <script src="assets/javascript/index.js"></script>
 </body>

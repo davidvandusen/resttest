@@ -60,9 +60,12 @@ targeted at it.
 
 ### Dependencies
 
-- Moment.js 2
+- Moment.js
     - Date parsing and formatting are error prone to write, and tedious to maintain. Moment.js is the de facto standard
       library for these tasks in JavaScript.
+- Handlebars.js
+    - Enough HTML templating is required for this project that a dependency on a minimal template engine seems 
+      reasonable. Handlebars handles simple but necessary tasks such as compiling templates and escaping user values.
 - http-server
     - Rather than browsing the project using the file URI scheme, a simple web server running on Node.js can serve the
       files in the **public** directory so that they may be accessed using the HTTP URI scheme.
@@ -70,6 +73,5 @@ targeted at it.
 With respect to [Consideration 5](http://resttest.bench.co/front-end#additional), the complexity of the solution making 
 sense for the problems I'm solving, there seems to be no need for a framework, module bundler, or CSS preprocessor in 
 this project. With more information about the scope of the project, the backlog of other features that have been 
-planned, and the intent of the company to maintain this project, additional dependencies may be considered. But, on its 
-own, plain old JavaScript, CSS, and HTML are more than sufficient for this tiny job, with the exception of date 
-formatting (Moment.js) because that is error prone code to maintain for any project.
+planned, and the intent of the company to maintain this project, additional dependencies may be considered. But as it 
+is, static assets seem ideal.
