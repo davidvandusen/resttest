@@ -22,15 +22,17 @@
     });
   };
 
+  // Returns a string representation of the given value as en-US currency (dollars and cents) in accounting format with
+  // parentheses for negative numbers.
   const formatAccounting = function formatCurrencyForAccounting(value) {
     const numericValue = Number(value);
     const isNegative = numericValue < 0;
-    const dollarsAndCents = numericValue.toFixed(2).split('.');
-    dollarsAndCents[0] = Math.abs(Number(dollarsAndCents[0])).toLocaleString();
-    var formatted = '';
-    if (isNegative) formatted += '(';
-    formatted += '$' + dollarsAndCents[0] + '.' + dollarsAndCents[1];
-    if (isNegative) formatted += ')';
+    const cents = numericValue.toFixed(2).split('.')[1];
+    const dollars = Math.floor(Math.abs(numericValue)).toLocaleString();
+    var formatted = '$' + dollars + '.' + cents;
+    if (isNegative) {
+      formatted = '(' + formatted + ')';
+    }
     return formatted;
   };
 
@@ -69,15 +71,17 @@
   const fetchTransactions = function fetchAllTransactionPages(config) {
     var combinedTransactions;
     var currentPage = 1;
-    const fetchPages = function recursivelyFetchPages() {
+    const fetchPages = function recursivelyFetchTransactionPages() {
       return fetch(getPageURL(config, currentPage))
         .then(parseJSON)
-        .then(function combineTransactions(transactions) {
+        .then(function combineTransactions(transactionsObject) {
           if (!combinedTransactions) {
-            combinedTransactions = transactions;
+            combinedTransactions = transactionsObject;
           } else {
-            combinedTransactions.transactions = combinedTransactions.transactions.concat(transactions.transactions);
+            combinedTransactions.transactions = combinedTransactions.transactions.concat(transactionsObject.transactions);
           }
+          // Note: this trusts that the API provides correct "totalCount" values that are consistent across pages
+          // and that all pages for these transactions are available and in order.
           if (combinedTransactions.transactions.length < combinedTransactions.totalCount) {
             currentPage++;
             return fetchPages();
@@ -90,14 +94,14 @@
   };
 
   const sumTransactions = function sumTransactionAmounts(transactions) {
-    return transactions.transactions.reduce(function sum(s, t) {
+    return transactions.reduce(function sum(s, t) {
       return s + Number(t.Amount);
     }, 0);
   };
 
-  const showTransactions = function showRenderedTransactionsTemplate(transactions) {
-    transactions.total = sumTransactions(transactions.transactions);
-    show('transactions-table-template', transactions);
+  const showTransactions = function showRenderedTransactionsTemplate(transactionsObject) {
+    transactionsObject.total = sumTransactions(transactionsObject.transactions);
+    show('transactions-table-template', transactionsObject);
   };
 
   const handleError = function genericErrorHandler(err) {
