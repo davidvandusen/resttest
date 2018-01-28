@@ -9,6 +9,7 @@
       .then(showTransactions)
       .catch(handleError);
   };
+
   document.addEventListener('DOMContentLoaded', main);
 
   const configureHandlebars = function configureHandlebars() {
@@ -34,6 +35,7 @@
   };
 
   const cachedTemplates = {};
+
   const loadTemplates = function loadTemplatesFromDOM() {
     const templateNodes = document.querySelectorAll('script[type="text/x-handlebars-template"]');
     for (var i = 0; i < templateNodes.length; i++) {
@@ -52,24 +54,24 @@
     document.getElementById('root').innerHTML = render(templateId, data);
   };
 
-  const parseJSONResponse = function parseJSONResponse(res) {
+  const parseJSON = function parseJSONFetchResponse(res) {
     return res.json();
   };
 
   const fetchConfig = function fetchAPIConfigFromLocal() {
-    return fetch('/config.json').then(parseJSONResponse);
+    return fetch('/config.json').then(parseJSON);
   };
 
-  const getPageURL = function getPageURL(config, pageNumber) {
+  const getPageURL = function getTransactionPageURL(config, pageNumber) {
     return config['API_TRANSACTIONS_URL'] + pageNumber + config['API_TRANSACTIONS_EXT'];
   };
 
-  const fetchTransactions = function fetchTransactionDataFromRemoteHost(config) {
+  const fetchTransactions = function fetchAllTransactionPages(config) {
     var combinedTransactions;
     var currentPage = 1;
     const fetchPages = function recursivelyFetchPages() {
       return fetch(getPageURL(config, currentPage))
-        .then(parseJSONResponse)
+        .then(parseJSON)
         .then(function combineTransactions(transactions) {
           if (!combinedTransactions) {
             combinedTransactions = transactions;
@@ -87,12 +89,18 @@
     return fetchPages();
   };
 
+  const sumTransactions = function sumTransactionAmounts(transactions) {
+    return transactions.transactions.reduce(function sum(s, t) {
+      return s + Number(t.Amount);
+    }, 0);
+  };
+
   const showTransactions = function showRenderedTransactionsTemplate(transactions) {
-    transactions.total = transactions.transactions.reduce(function sum(s, t) {return s + Number(t.Amount);}, 0);
+    transactions.total = sumTransactions(transactions.transactions);
     show('transactions-table-template', transactions);
   };
 
-  const handleError = function showErrorWithTemplate(err) {
+  const handleError = function genericErrorHandler(err) {
     console.error(err);
     show('error-template', {
       message: 'The application encountered an error.'
