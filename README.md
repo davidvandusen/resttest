@@ -5,7 +5,7 @@ This project is an implementation of the Bench front-end [restTest](http://restt
 This implementation has been approached as an MVP for demonstration purposes, but the code has been written modularly
 enough so that when the scope is fleshed out and choices are made about how the application will grow in the future it
 will be prepared for easy refactoring or integration into a framework if necessary. Functions have been extracted where
-possible to enabled them to be easily tested when necessary.
+possible to enable them to be easily tested when necessary.
 
 With respect to [Consideration 5](http://resttest.bench.co/front-end#additional), the complexity of the solution making 
 sense for the problems I'm solving, there seems to be no need for a framework, module bundler, or CSS preprocessor in 
