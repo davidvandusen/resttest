@@ -4,7 +4,7 @@
   "description": "An implementation of the Bench front-end restTest.",
   "scripts": {
     "start": "./node_modules/.bin/http-server",
-    "postinstall": "cp -r ./node_modules/moment ./public/vendor/moment && cp -r ./node_modules/handlebars ./public/vendor/handlebars"
+    "postinstall": "cp ./node_modules/moment/min/moment.min.js ./public/vendor && cp ./node_modules/handlebars/dist/handlebars.min.js ./public/vendor"
   },
   "repository": {
     "type": "git",
